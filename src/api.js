@@ -20,4 +20,12 @@ export const getMovieDetails = async (movieId) => {
   return response.data;
 }
 
+export const getMovieCredits = async (movieId) => {
+  const response = await axios.get(`/movie/${movieId}/credits?language=en-US`);
+  return response.data;
+}
 
+export const getMovieReviews = async (movieId) => {
+  const response = await axios.get(`/movie/${movieId}/reviews?language=en-US&page=1`);
+  return response.data;
+}

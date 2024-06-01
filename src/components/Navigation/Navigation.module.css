@@ -11,11 +11,11 @@
   
   .link:hover {
     text-decoration: underline;
-    color: #b02e61;
+    color: #ec2676;
   }
   
   .active {
-    color: #b02e61;
+    color: #ec2676;
   }
 
   .borderLine {

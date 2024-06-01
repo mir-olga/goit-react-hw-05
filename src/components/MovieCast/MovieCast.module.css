@@ -1,0 +1,25 @@
+.listActorName {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.liActorName {
+    margin-bottom: 30px;
+    margin-top: 30px;
+    list-style-type: none;
+    width: 20%;
+}
+.name{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.actorName {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+

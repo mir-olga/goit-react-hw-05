@@ -24,7 +24,7 @@ export default function MovieDetailsPage() {
         try {
             const response = await getSearchMovies(query);
             setMovies(response.results);
-            console.log(response.results);
+            //console.log(response.results);
         }
         catch (error) {
           setError(true);
@@ -38,10 +38,10 @@ export default function MovieDetailsPage() {
 
     return (
     <div>
-      <p>This is MovieDetailsPage</p>
       <SearchBar onSearch={searchMovie}/>
       {error && <p>OOOOPS! ERROR!</p>}
       {movies.length > 0 && <MovieList movies={movies}/>}
+      
       
     </div>
     )

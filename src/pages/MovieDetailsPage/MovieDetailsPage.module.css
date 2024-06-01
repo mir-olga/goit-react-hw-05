@@ -1,6 +1,7 @@
 .description {
     display: flex;
     flex-wrap: wrap;
+    border-bottom: 2px solid gray;
 }
 
 .poster {
@@ -33,4 +34,9 @@
     font-size: 20px;
     margin-bottom: 10px;
     margin-top: 10px; 
+ }
+
+ .info {
+    display: block;
+    border-bottom: 2px solid gray;
  }

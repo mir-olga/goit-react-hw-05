@@ -33,7 +33,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <p>This is Home page</p>
+      <h1>Trending today</h1>
       {error && <p>OOOOPS! ERROR!</p>}
       <MovieList movies={movies}/>
     </div>
