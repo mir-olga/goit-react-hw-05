@@ -1,9 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect } from 'react';
-//import { getSearchMovies, getTrendingMovies } from '../api';
-
 import { Navigation } from "./Navigation/Navigation";
-
 import { MovieCast } from "./MovieCast/MovieCast";
 import { MovieReviews } from "./MovieReviews/MovieReviews";
 import HomePage from '../pages/HomePage/HomePage';
