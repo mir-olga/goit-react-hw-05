@@ -14,7 +14,6 @@ export default function HomePage() {
               
               const response = await getTrendingMovies({abortController: controller,});
               setMovies(response.results);
-              console.log(response);
           }
           catch (error) {
               if (error.code !== 'ERR_CANCELED') {

@@ -1,0 +1,19 @@
+.backLink {
+  background-color: #ec2676;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin:5px 0;
+}
+
+.backLink:hover, .backLink:active {
+    background-color: #3c199c;
+    color: white;
+    text-decoration: none;
+  }
+
+.fcLeft{
+    width: 30px;
+  }

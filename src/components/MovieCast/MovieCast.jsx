@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useParams} from 'react-router-dom';
 import css from './MovieCast.module.css';
 
-
 export const MovieCast = () => {
     const { movieId } = useParams();
     const [movieCredits, setMovieCredits] = useState([]);
@@ -13,18 +12,14 @@ export const MovieCast = () => {
           try {
               const response = await getMovieCredits(movieId);
               setMovieCredits(response.cast);
-              
-              //console.log("response",response);
                 }
-          catch (error) {
-            console.log("Error");
-          }
+          catch (error) {}
       }
       
           fetchMovieCredits();
       }, [movieId]);
 
-     // console.log("movieCredits",movieCredits);
+      const defaultImg = 'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
 
     return (
         <div>
@@ -32,7 +27,9 @@ export const MovieCast = () => {
             <ul className={css.listActorName}>
                 {movieCredits.map(movieCredit => (
                     <li key={movieCredit.id} className={css.liActorName}>
-                        <img src={`https://image.tmdb.org/t/p/w500/${movieCredit.profile_path}`} alt="movie cast" width="100px"/>
+                         {movieCredit.profile_path ? (<img src={`https://image.tmdb.org/t/p/w500/${movieCredit.profile_path}`} alt="movie cast" width="100px"/>) 
+                                                   : (<img src={defaultImg} className={css.posterImg} alt="Movie Poster" width="100px" height="150px"/>) }
+
                         <h4 className={css.name}>{movieCredit.name}</h4>
                         <p className={css.actorName}>Character: {movieCredit.character}</p>
                      </li>

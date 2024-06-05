@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams} from 'react-router-dom';
 import css from './MovieReviews.module.css';
 
+
 export const MovieReviews = () => {
 
     const { movieId } = useParams();
@@ -13,12 +14,8 @@ export const MovieReviews = () => {
           try {
               const response = await getMovieReviews(movieId);
               setMovieReviews(response.results);
-              
-              console.log("MovieReviews",response);
                 }
-          catch (error) {
-            console.log("Error");
-          }
+          catch (error) {}
       }
       
           fetchMovieReviews();
@@ -39,5 +36,5 @@ export const MovieReviews = () => {
             {movieReviews.length == 0 && <p>We don`t have any reviews for this movie</p>}
         </div>
     )
-
   };
+

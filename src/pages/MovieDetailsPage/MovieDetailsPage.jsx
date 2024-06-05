@@ -1,14 +1,16 @@
 import { getMovieDetails } from '../../api';
-import { useEffect, useState } from 'react';
-import { useParams} from 'react-router-dom';
-import { Link, Outlet  } from 'react-router-dom';
+import { useEffect, useRef, useState, Suspense } from 'react';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import moment from 'moment';
+import {BackLink} from '../../components/BackLink/BackLink'
 import css from './MovieDetailsPage.module.css';
 
 export default function MoviesPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState([]);
   const [genreNames, setGenreNames] = useState([]);
+  const location = useLocation();
+  const backLinkHref = useRef(location.state);
 
   useEffect(() => {
     async function fetchMovieData() {
@@ -16,21 +18,24 @@ export default function MoviesPage() {
         const response = await getMovieDetails(movieId);
         setMovieData(response);
         setGenreNames(response.genres.map(genre => genre.name).join(', '));
-        //console.log(response);
       }
-      catch (error) {
-      //console.log("Ошибка");
-         }
+      catch (error) {}
     }
 
     fetchMovieData();
   }, [movieId]);
-   
+
+  const defaultImg = 'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
+
     return (
       <div>
+        <BackLink href={backLinkHref.current ?? "/movies"}></BackLink>
           <div className={css.description}>
               <div className={css.poster}>
-                  <img src={`https://image.tmdb.org/t/p/w500/${movieData.poster_path}`} className={css.posterImg} alt="Movie Poster" />
+                  
+                  {movieData.poster_path ? (<img src={`https://image.tmdb.org/t/p/w500/${movieData.poster_path}`} className={css.posterImg} alt="Movie Poster" />) 
+                  : (<img src={defaultImg} className={css.posterImg} alt="Movie Poster" />) }
+
               </div>
               <div className={css.textDescription}>
                   <h1 className={css.title}>{movieData.title} ({moment(movieData.release_date).format('YYYY')})</h1>
@@ -52,7 +57,9 @@ export default function MoviesPage() {
                     </li>
                   </ul>
               </div>
-              <Outlet />
+              <Suspense fallback={<b>Loading subpage...</b>}>
+                  <Outlet />
+              </Suspense>
           </div>
   )}
 
