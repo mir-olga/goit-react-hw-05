@@ -3,23 +3,19 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SearchBar }  from '../../components/SearchBar/SearchBar';
 import { MovieList }  from '../../components/MovieList/MovieList';
+import { Loader }  from '../../components/Loader/Loader';
 
 export default function MoviesPage() {
-  //const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const [params, setParams] = useSearchParams();
   const searchValue = params.get('searchValue') ?? '';
 
   const searchMovie = (query) => {
-    //setQuery(query);
-    //setMovies([]);
-    setParams({searchValue:query});
-   // changeSearchValue;
+    setParams({searchValue:query} ?? {});
   };
-
-  
 
   useEffect(() => {
     
@@ -28,6 +24,8 @@ export default function MoviesPage() {
     }
 
     async function fetchGetSearchMovies() {
+      setIsLoading(true);
+
         try {
             const response = await getSearchMovies(searchValue);
             setMovies(response.results);
@@ -35,17 +33,18 @@ export default function MoviesPage() {
         catch (error) {
           setError(true);
         }
+        finally {
+          setIsLoading(false);
+      }
     }
 
     fetchGetSearchMovies();
   }, [searchValue]);
 
-
-//console.log("params",params);
-
     return (
     <div>
       <SearchBar  onSearch={searchMovie}/>
+      {isLoading && <Loader/>}
       {error && <p>OOOOPS! ERROR!</p>}
       {movies.length > 0 && <MovieList movies={movies}/>}
     </div>

@@ -1,11 +1,7 @@
 import css from './SearchBar.module.css';
-//import { useState } from "react";
-
 
 export const SearchBar = ({ onSearch }) => {
 
-  //const [search, setSearch] = useState("");
-  
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -24,8 +20,6 @@ export const SearchBar = ({ onSearch }) => {
             autoFocus
             placeholder=""
             className={css.barInput}
-            //value={search}
-            //onChange={({ valueParam }) => setSearch(valueParam)}
             />
             <button type="submit" className={css.searchBut}>Search movie</button>
         </form>

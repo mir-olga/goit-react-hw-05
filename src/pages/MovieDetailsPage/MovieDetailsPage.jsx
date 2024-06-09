@@ -4,11 +4,13 @@ import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import {BackLink} from '../../components/BackLink/BackLink'
 import css from './MovieDetailsPage.module.css';
+import { Loader } from '../../components/Loader/Loader';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState([]);
   const [genreNames, setGenreNames] = useState([]);
+  const [error, setError] = useState(false);
   const location = useLocation();
   const backLinkHref = useRef(location.state);
 
@@ -19,7 +21,9 @@ export default function MovieDetailsPage() {
         setMovieData(response);
         setGenreNames(response.genres.map(genre => genre.name).join(', '));
       }
-      catch (error) {}
+      catch (error) {
+        setError(true);
+      }
     }
 
     fetchMovieData();
@@ -29,6 +33,7 @@ export default function MovieDetailsPage() {
 
     return (
       <div>
+        {error && <p>OOOOPS! ERROR!</p>}
         <BackLink href={backLinkHref.current ?? "/movies"}></BackLink>
           <div className={css.description}>
               <div className={css.poster}>
@@ -57,7 +62,7 @@ export default function MovieDetailsPage() {
                     </li>
                   </ul>
               </div>
-              <Suspense fallback={<b>Loading subpage...</b>}>
+              <Suspense fallback={<Loader/>}>
                   <Outlet />
               </Suspense>
           </div>
