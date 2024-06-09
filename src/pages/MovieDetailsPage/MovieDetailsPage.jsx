@@ -5,7 +5,7 @@ import moment from 'moment';
 import {BackLink} from '../../components/BackLink/BackLink'
 import css from './MovieDetailsPage.module.css';
 
-export default function MoviesPage() {
+export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState([]);
   const [genreNames, setGenreNames] = useState([]);
